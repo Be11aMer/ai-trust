@@ -19,7 +19,7 @@
 11. [Swapping Storage Backends](#11-swapping-storage-backends)
 12. [Testing Strategy](#12-testing-strategy)
 13. [CI/CD and Deployment](#13-cicd-and-deployment)
-14. [Deploying to Cloudflare Pages (Recommended)](#14-cloudflare-pages)
+14. [Cloudflare Workers (Recommended Free Deployment)](#14-cloudflare-workers)
 15. [Docker / Self-Hosted](#15-docker--self-hosted)
 
 ---
@@ -425,75 +425,43 @@ npm run typecheck     # tsc --noEmit
 | Workflow | Triggers on | Steps |
 |----------|-------------|-------|
 | `ci.yml` | Every non-main push/PR | lint → typecheck → test+coverage → build → Docker health check |
-| `deploy.yml` | Push to `main` | Triggers Render/Cloudflare deploy hook → health check |
+| `deploy.yml` | Push to `main` | Handled by Cloudflare GitHub integration |
 
-### Required GitHub Secrets
+### Required Deploy Configurations
 
-| Secret | Description |
-|--------|-------------|
-| `RENDER_DEPLOY_HOOK_URL` | Render deploy hook (if using Render) |
-| `RENDER_DEPLOY_URL` | Public Render URL for health check |
-| `CF_API_TOKEN` | Cloudflare API token (if using Cloudflare Pages) |
-| `CF_ACCOUNT_ID` | Cloudflare account ID |
+Cloudflare handles deployment natively via `wrangler.jsonc`. No GitHub Secrets are strictly required for auto-deployment via Cloudflare's dashboard integration unless managing custom GitHub Actions pipelines.
 
 ---
 
-## 14. Cloudflare Pages (Recommended Free Deployment)
+## 14. Cloudflare Workers (Recommended Free Deployment)
 
 > **Recommended over Render** for this app. Serves from Cloudflare's global edge — no cold starts, free forever for static sites, custom domain with free SSL.
 
 ### One-time setup
 
 1. Push your code to GitHub
-2. Go to [Cloudflare Pages](https://pages.cloudflare.com) → **Create a project** → **Connect to Git**
-3. Select your repo
-4. Set build configuration:
-   - **Build command:** `npm run build`
-   - **Build output directory:** `dist`
-   - **Node version:** `20`
-5. Click **Save and Deploy**
+2. Go to [Cloudflare Dashboard](https://dash.cloudflare.com) → **Workers & Pages** → **Create** → **Connect to Git**
+3. Select your repo and allow the automated Cloudflare PR (`cloudflare/workers-autoconfig`) to configure your project.
+4. Cloudflare will automatically add a `wrangler.jsonc` file to handle single-page application routing.
+5. Merge the PR.
 
-Every push to `main` auto-deploys. PRs get preview URLs automatically.
+Every push to `main` auto-deploys via the Cloudflare integration.
 
 ### Custom domain
 
 Dashboard → your project → **Custom domains** → Add domain → follow DNS instructions.
 
-### Update `deploy.yml` for Cloudflare
+### Single Page Application (SPA) Routing
 
-Replace the Render step with:
+Because this is an SPA, previously we used tools like the `_redirects` file to rewrite all paths. In the new Cloudflare Workers deployment, `wrangler.jsonc` completely manages this inherently via the setting:
 
-```yaml
-- name: Deploy to Cloudflare Pages
-  uses: cloudflare/pages-action@v1
-  with:
-    apiToken: ${{ secrets.CF_API_TOKEN }}
-    accountId: ${{ secrets.CF_ACCOUNT_ID }}
-    projectName: ai-trust-learning-path
-    directory: dist
-    gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+```jsonc
+  "assets": {
+    "not_found_handling": "single-page-application"
+  }
 ```
 
-> **Note:** Cloudflare Pages doesn't use `nginx.conf` — security headers must be added via `public/_headers` (see below).
-
-### `public/_headers` for Cloudflare Pages security headers
-
-Create this file:
-
-```
-/*
-  X-Frame-Options: DENY
-  X-Content-Type-Options: nosniff
-  Referrer-Policy: strict-origin-when-cross-origin
-  Permissions-Policy: geolocation=(), microphone=(), camera=()
-  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self';
-
-/index.html
-  Cache-Control: no-store, no-cache, must-revalidate
-
-/assets/*
-  Cache-Control: public, max-age=31536000, immutable
-```
+**Do not add a `public/_redirects` file with `/* /index.html 200`**, as this overrides the built-in assets binding and will artificially force all `js`/`css` assets to load the HTML document instead.
 
 ---
 

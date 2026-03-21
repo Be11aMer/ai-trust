@@ -139,29 +139,22 @@ docker build --target production → Health check
 push to main
     │
     ▼
-Trigger Render Deploy Hook
+trigger Deploy via Cloudflare Workers (Wrangler)
     │
     ▼
-Wait 60s → Health check Render URL
+Wait for deploy → Health check URL
 ```
 
 ---
 
-## Deployment — Render + GitHub Actions
+## Deployment — Cloudflare Workers
 
-### Render Setup
+The application is configured to deploy automatically to **Cloudflare Workers**. Since it is a Single Page Application (SPA), the `wrangler.jsonc` file configures the `not_found_handling` to serve `index.html` natively.
 
-1. Create a new **Web Service** on [render.com](https://render.com)
-2. Select **Docker** as the environment
-3. Point to this repository; Render will pick up `render.yaml` automatically
-4. Note your **Deploy Hook URL** from the Render dashboard
+### Automated Setup
 
-### GitHub Secrets Required
-
-| Secret                   | Description                          |
-|--------------------------|--------------------------------------|
-| `RENDER_DEPLOY_HOOK_URL` | Render deploy hook from dashboard    |
-| `RENDER_DEPLOY_URL`      | Public URL of your Render service    |
+The repository utilizes the Cloudflare Workers GitHub automation.
+Any push to the `main` branch is picked up by the Cloudflare integration and deployed to production. 
 
 ### Branch Protection (document and enforce in GitHub settings)
 
