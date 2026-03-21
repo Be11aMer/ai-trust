@@ -52,11 +52,7 @@ export function PathView({
         onFilterChange={setFilterMode}
         onPhaseChange={setActivePhase}
       />
-      <PhaseMiniMap
-        progress={progress}
-        activePhase={activePhase}
-        onPhaseClick={setActivePhase}
-      />
+      <PhaseMiniMap progress={progress} activePhase={activePhase} onPhaseClick={setActivePhase} />
       <div style={{ flex: 1, overflowY: 'auto', padding: '18px' }}>
         {visiblePhases.map((ph) => {
           const enrichedSteps = ph.steps.map((s) => {

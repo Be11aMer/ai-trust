@@ -14,7 +14,10 @@ describe('useGraphInteraction', () => {
     // Simulate multiple zoom-out wheel events
     for (let i = 0; i < 20; i++) {
       act(() => {
-        result.current.handleWheel({ deltaY: 100, preventDefault: () => undefined } as unknown as React.WheelEvent);
+        result.current.handleWheel({
+          deltaY: 100,
+          preventDefault: () => undefined,
+        } as unknown as React.WheelEvent);
       });
     }
     expect(result.current.transform.k).toBeGreaterThanOrEqual(0.25);
@@ -24,7 +27,10 @@ describe('useGraphInteraction', () => {
     const { result } = renderHook(() => useGraphInteraction({ x: 0, y: 0, k: 2.9 }));
     for (let i = 0; i < 20; i++) {
       act(() => {
-        result.current.handleWheel({ deltaY: -100, preventDefault: () => undefined } as unknown as React.WheelEvent);
+        result.current.handleWheel({
+          deltaY: -100,
+          preventDefault: () => undefined,
+        } as unknown as React.WheelEvent);
       });
     }
     expect(result.current.transform.k).toBeLessThanOrEqual(3.0);
@@ -33,7 +39,10 @@ describe('useGraphInteraction', () => {
   it('wheel delta negative = zoom in (k increases)', () => {
     const { result } = renderHook(() => useGraphInteraction({ x: 0, y: 0, k: 1 }));
     act(() => {
-      result.current.handleWheel({ deltaY: -100, preventDefault: () => undefined } as unknown as React.WheelEvent);
+      result.current.handleWheel({
+        deltaY: -100,
+        preventDefault: () => undefined,
+      } as unknown as React.WheelEvent);
     });
     expect(result.current.transform.k).toBeGreaterThan(1);
   });
@@ -41,7 +50,10 @@ describe('useGraphInteraction', () => {
   it('wheel delta positive = zoom out (k decreases)', () => {
     const { result } = renderHook(() => useGraphInteraction({ x: 0, y: 0, k: 1 }));
     act(() => {
-      result.current.handleWheel({ deltaY: 100, preventDefault: () => undefined } as unknown as React.WheelEvent);
+      result.current.handleWheel({
+        deltaY: 100,
+        preventDefault: () => undefined,
+      } as unknown as React.WheelEvent);
     });
     expect(result.current.transform.k).toBeLessThan(1);
   });

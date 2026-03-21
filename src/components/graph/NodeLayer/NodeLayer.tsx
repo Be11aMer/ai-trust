@@ -40,7 +40,11 @@ export function NodeGlyph({
   onHover,
 }: NodeGlyphProps): React.JSX.Element {
   const col = PHASE_COLORS[node.phaseId];
-  const r = isSelected ? NODE_RADIUS_SELECTED : isHovered ? NODE_RADIUS_HOVERED : NODE_RADIUS_DEFAULT;
+  const r = isSelected
+    ? NODE_RADIUS_SELECTED
+    : isHovered
+      ? NODE_RADIUS_HOVERED
+      : NODE_RADIUS_DEFAULT;
   const isTrust = node.tag?.includes('★');
   const { x, y } = position;
 
@@ -139,7 +143,9 @@ export function NodeGlyph({
             fontSize="9"
             fontWeight="700"
           >
-            {node.short.length > LABEL_MAX_LEN ? `${node.short.slice(0, LABEL_MAX_LEN)}…` : node.short}
+            {node.short.length > LABEL_MAX_LEN
+              ? `${node.short.slice(0, LABEL_MAX_LEN)}…`
+              : node.short}
           </text>
         </g>
       )}

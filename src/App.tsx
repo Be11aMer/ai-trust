@@ -77,11 +77,7 @@ export function App({ store }: AppProps): React.JSX.Element {
           overflow: 'hidden',
         }}
       >
-        <TopBar
-          view={view}
-          onViewChange={setView}
-          progress={store.progress}
-        />
+        <TopBar view={view} onViewChange={setView} progress={store.progress} />
 
         {view === 'path' && (
           <PathView

@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { StepCard } from './StepCard';
 import { ALL_STEPS } from '@/constants/phases';
+
+import { StepCard } from './StepCard';
 
 const meta: Meta<typeof StepCard> = {
   title: 'Path/StepCard',

@@ -86,7 +86,10 @@ export function StepCard({
           aria-checked={done}
           tabIndex={0}
           onKeyDown={(e) => {
-            if (e.key === 'Enter') { e.stopPropagation(); onToggle(step.id); }
+            if (e.key === 'Enter') {
+              e.stopPropagation();
+              onToggle(step.id);
+            }
           }}
           style={{
             width: '18px',
@@ -103,9 +106,7 @@ export function StepCard({
             transition: 'all 0.12s',
           }}
         >
-          {done && (
-            <span style={{ color: '#000', fontSize: '11px', fontWeight: '800' }}>✓</span>
-          )}
+          {done && <span style={{ color: '#000', fontSize: '11px', fontWeight: '800' }}>✓</span>}
         </div>
 
         {/* Step number */}

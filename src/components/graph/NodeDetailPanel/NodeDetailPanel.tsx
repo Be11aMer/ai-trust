@@ -57,9 +57,7 @@ export function NodeDetailPanel({
       >
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
           <div style={{ flex: 1 }}>
-            <div
-              style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '3px' }}
-            >
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '3px' }}>
               <span
                 style={{
                   color: col,

@@ -43,13 +43,17 @@
 }
 
 /* ── RESET ──────────────────────────────────────────────────────────────────── */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-html, body, #root {
+html,
+body,
+#root {
   height: 100%;
   width: 100%;
   overflow: hidden;
@@ -74,7 +78,8 @@ a {
   text-decoration: none;
 }
 
-textarea, input {
+textarea,
+input {
   font-family: var(--font-code);
 }
 

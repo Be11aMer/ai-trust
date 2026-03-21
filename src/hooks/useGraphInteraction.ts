@@ -65,5 +65,13 @@ export function useGraphInteraction(
     }));
   }, []);
 
-  return { transform, dragging, handleMouseDown, handleMouseMove, handleMouseUp, handleWheel, setTransform };
+  return {
+    transform,
+    dragging,
+    handleMouseDown,
+    handleMouseMove,
+    handleMouseUp,
+    handleWheel,
+    setTransform,
+  };
 }

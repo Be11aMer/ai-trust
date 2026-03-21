@@ -118,7 +118,7 @@ export class ForceLayoutEngine implements ILayoutEngine {
         const dx = pos[bId].x - pos[aId].x;
         const dy = pos[bId].y - pos[aId].y;
         const d = Math.sqrt(dx * dx + dy * dy) || 1;
-        const f = ((d - EDGE_LENGTH) * SPRING_K * alpha);
+        const f = (d - EDGE_LENGTH) * SPRING_K * alpha;
         pos[aId].vx += (dx / d) * f;
         pos[aId].vy += (dy / d) * f;
         pos[bId].vx -= (dx / d) * f;
@@ -127,7 +127,7 @@ export class ForceLayoutEngine implements ILayoutEngine {
 
       // Phase-column gravity + vertical centering
       ALL_STEPS.forEach((n) => {
-        const pi = PHASE_ORDER.indexOf(n.phaseId as typeof PHASE_ORDER[number]);
+        const pi = PHASE_ORDER.indexOf(n.phaseId as (typeof PHASE_ORDER)[number]);
         const tx = (pi + 0.5) * (w / phaseCount);
         pos[n.id].vx += (tx - pos[n.id].x) * SPRING_K * alpha;
         pos[n.id].vy += (h / 2 - pos[n.id].y) * CENTRE_GRAVITY * alpha;
@@ -137,8 +137,14 @@ export class ForceLayoutEngine implements ILayoutEngine {
       ALL_STEPS.forEach((n) => {
         pos[n.id].vx *= DAMPING;
         pos[n.id].vy *= DAMPING;
-        pos[n.id].x = Math.max(BOUNDARY_PAD, Math.min(w - BOUNDARY_PAD, pos[n.id].x + pos[n.id].vx));
-        pos[n.id].y = Math.max(BOUNDARY_PAD, Math.min(h - BOUNDARY_PAD, pos[n.id].y + pos[n.id].vy));
+        pos[n.id].x = Math.max(
+          BOUNDARY_PAD,
+          Math.min(w - BOUNDARY_PAD, pos[n.id].x + pos[n.id].vx),
+        );
+        pos[n.id].y = Math.max(
+          BOUNDARY_PAD,
+          Math.min(h - BOUNDARY_PAD, pos[n.id].y + pos[n.id].vy),
+        );
       });
     }
 

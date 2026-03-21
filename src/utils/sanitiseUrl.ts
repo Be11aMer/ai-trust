@@ -21,8 +21,7 @@ export function sanitiseUrl(raw: string): string {
   if (!trimmed) return '';
 
   // Prepend https:// if there is no protocol
-  const withProtocol =
-    trimmed.includes('://') ? trimmed : `https://${trimmed}`;
+  const withProtocol = trimmed.includes('://') ? trimmed : `https://${trimmed}`;
 
   try {
     const parsed = new URL(withProtocol);

@@ -180,9 +180,7 @@ export function TopBar({ view, onViewChange, progress }: TopBarProps): React.JSX
               }}
             >
               {String(nextStep.id).padStart(2, '0')} ·{' '}
-              {nextStep.title.length > 28
-                ? `${nextStep.title.slice(0, 28)}…`
-                : nextStep.title}
+              {nextStep.title.length > 28 ? `${nextStep.title.slice(0, 28)}…` : nextStep.title}
             </div>
           </div>
         )}

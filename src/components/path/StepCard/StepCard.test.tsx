@@ -2,8 +2,9 @@ import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { StepCard } from './StepCard';
 import { ALL_STEPS } from '@/constants/phases';
+
+import { StepCard } from './StepCard';
 
 const step = ALL_STEPS.find((s) => s.id === 1)!;
 

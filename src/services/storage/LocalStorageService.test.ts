@@ -65,7 +65,9 @@ describe('LocalStorageService', () => {
 
   it('handles localStorage.setItem throwing gracefully', () => {
     const orig = Storage.prototype.setItem;
-    Storage.prototype.setItem = () => { throw new Error('QuotaExceededError'); };
+    Storage.prototype.setItem = () => {
+      throw new Error('QuotaExceededError');
+    };
     const svc = new LocalStorageService();
     expect(() => svc.set('x', 'y')).not.toThrow();
     Storage.prototype.setItem = orig;

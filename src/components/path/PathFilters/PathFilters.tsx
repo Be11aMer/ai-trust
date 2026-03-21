@@ -62,7 +62,10 @@ export function PathFilters({
         </button>
       ))}
       <div style={{ width: '1px', background: C.border, margin: '6px 4px' }} />
-      {[{ id: 'all', label: 'All Phases', color: C.sky }, ...PHASES.map((p) => ({ id: p.id, label: p.label, color: p.color }))].map((p) => (
+      {[
+        { id: 'all', label: 'All Phases', color: C.sky },
+        ...PHASES.map((p) => ({ id: p.id, label: p.label, color: p.color })),
+      ].map((p) => (
         <button
           key={p.id}
           id={`phase-filter-${p.id}`}

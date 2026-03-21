@@ -1,4 +1,5 @@
 import { describe, it, expect } from 'vitest';
+
 import { sanitiseUrl, displayUrl } from './sanitiseUrl';
 
 describe('sanitiseUrl', () => {

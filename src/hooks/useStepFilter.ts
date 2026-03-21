@@ -27,8 +27,6 @@ export function useStepFilter(
         if (filterMode === 'done') return !!progress[s.id];
         return true;
       }),
-    })).filter(
-      (ph) => (activePhase === 'all' || ph.id === activePhase) && ph.steps.length > 0,
-    );
+    })).filter((ph) => (activePhase === 'all' || ph.id === activePhase) && ph.steps.length > 0);
   }, [filterMode, activePhase, progress]);
 }

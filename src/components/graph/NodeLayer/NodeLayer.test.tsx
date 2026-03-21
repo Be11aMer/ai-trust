@@ -2,8 +2,9 @@ import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { NodeGlyph } from './NodeLayer';
 import { ALL_STEPS } from '@/constants/phases';
+
+import { NodeGlyph } from './NodeLayer';
 
 const trustNode = ALL_STEPS.find((s) => s.id === 26)!; // BitNet — LLM ★ (trust)
 const defaultPos = { x: 100, y: 100 };
@@ -52,9 +53,7 @@ describe('NodeGlyph', () => {
   it('node with artifacts shows yellow dot', () => {
     const { container } = renderGlyph({ hasArtifacts: true });
     const circles = container.querySelectorAll('circle');
-    const yellowDot = Array.from(circles).find(
-      (c) => c.getAttribute('fill') === '#fbbf24',
-    );
+    const yellowDot = Array.from(circles).find((c) => c.getAttribute('fill') === '#fbbf24');
     expect(yellowDot).toBeDefined();
   });
 

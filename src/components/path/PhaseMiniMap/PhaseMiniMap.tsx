@@ -14,7 +14,11 @@ export interface PhaseMiniMapProps {
  * Horizontal strip of per-phase progress bars, acting as a mini-map for the path view.
  * Clicking a phase segment toggles the active phase filter.
  */
-export function PhaseMiniMap({ progress, activePhase, onPhaseClick }: PhaseMiniMapProps): React.JSX.Element {
+export function PhaseMiniMap({
+  progress,
+  activePhase,
+  onPhaseClick,
+}: PhaseMiniMapProps): React.JSX.Element {
   return (
     <div
       style={{

@@ -38,7 +38,10 @@ export function LinkInput({ id, onAdd }: LinkInputProps): React.JSX.Element {
         <input
           id={`link-input-${id}`}
           value={value}
-          onChange={(e) => { setValue(e.target.value); setError(''); }}
+          onChange={(e) => {
+            setValue(e.target.value);
+            setError('');
+          }}
           onKeyDown={(e) => {
             if (e.key === 'Enter') submit();
           }}

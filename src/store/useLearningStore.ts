@@ -40,7 +40,9 @@ export interface LearningStore {
  * @param storage - An IStorageService implementation (production or in-memory).
  * @returns A Zustand store bound to the provided storage.
  */
-export function createLearningStore(storage: IStorageService): UseBoundStore<StoreApi<LearningStore>> {
+export function createLearningStore(
+  storage: IStorageService,
+): UseBoundStore<StoreApi<LearningStore>> {
   const persist = (state: Pick<LearningStore, 'progress' | 'notes' | 'links'>): void => {
     const data: PersistedState = {
       progress: state.progress,
@@ -92,7 +94,11 @@ export function createLearningStore(storage: IStorageService): UseBoundStore<Sto
       try {
         const raw = storageService.get(STORE_KEY);
         if (raw) {
-          const { progress = {}, notes = {}, links = {} } = JSON.parse(raw) as Partial<PersistedState>;
+          const {
+            progress = {},
+            notes = {},
+            links = {},
+          } = JSON.parse(raw) as Partial<PersistedState>;
           set({ progress, notes, links, loaded: true });
         } else {
           set({ loaded: true });

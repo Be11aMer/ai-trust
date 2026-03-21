@@ -97,7 +97,9 @@ describe('useLearningStore', () => {
   describe('storage failure', () => {
     it('initialises with empty state if storage throws', async () => {
       const badStorage = {
-        get: (): string | null => { throw new Error('storage error'); },
+        get: (): string | null => {
+          throw new Error('storage error');
+        },
         set: (): void => undefined,
         delete: (): void => undefined,
       };

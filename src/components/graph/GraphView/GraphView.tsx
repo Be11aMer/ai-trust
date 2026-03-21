@@ -55,8 +55,15 @@ export function GraphView({
   const [graphFilter, setGraphFilter] = useState<GraphFilterMode>('all');
 
   const { positions, computePositions } = useGraphLayout();
-  const { transform, dragging, handleMouseDown, handleMouseMove, handleMouseUp, handleWheel, setTransform } =
-    useGraphInteraction();
+  const {
+    transform,
+    dragging,
+    handleMouseDown,
+    handleMouseMove,
+    handleMouseUp,
+    handleWheel,
+    setTransform,
+  } = useGraphInteraction();
   const visibleIds = useGraphFilter(graphFilter, progress);
 
   // Compute layout on first mount
@@ -76,8 +83,8 @@ export function GraphView({
         setGraphReady(true);
       }
     }, 50);
-    return () => clearTimeout(timer);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    return (): void => clearTimeout(timer);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Handle focus from path view
@@ -96,11 +103,15 @@ export function GraphView({
     }
   }, [focusNodeId, positions, dims, onClearFocus, setTransform]);
 
-  const connectedIds = selectedNode !== null
-    ? new Set(
-        EDGES.filter(([a, b]) => a === selectedNode || b === selectedNode).flatMap(([a, b]) => [a, b]),
-      )
-    : new Set<number>();
+  const connectedIds =
+    selectedNode !== null
+      ? new Set(
+          EDGES.filter(([a, b]) => a === selectedNode || b === selectedNode).flatMap(([a, b]) => [
+            a,
+            b,
+          ]),
+        )
+      : new Set<number>();
 
   const selNode = ALL_STEPS.find((s) => s.id === selectedNode);
 

@@ -5,6 +5,7 @@ import '@/styles/tokens.css';
 import { LocalStorageService } from '@/services/storage/LocalStorageService';
 import { createLearningStore } from '@/store/useLearningStore';
 import type { LearningStore } from '@/store/useLearningStore';
+
 import { App } from './App';
 
 /**
@@ -22,7 +23,7 @@ function Root(): React.JSX.Element {
   // Hydrate on first render
   React.useEffect(() => {
     void store.hydrate(storage);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return <App store={store} />;

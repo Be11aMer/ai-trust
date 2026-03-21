@@ -32,8 +32,10 @@ export function EdgeLayer({
         const pa = positions[aId];
         const pb = positions[bId];
         const bothDone = !!progress[aId] && !!progress[bId];
-        const isHighlighted = selectedNode !== null && (aId === selectedNode || bId === selectedNode);
-        const col = PHASE_COLORS[ALL_STEPS.find((n) => n.id === aId)?.phaseId ?? 'foundation'] ?? C.border;
+        const isHighlighted =
+          selectedNode !== null && (aId === selectedNode || bId === selectedNode);
+        const col =
+          PHASE_COLORS[ALL_STEPS.find((n) => n.id === aId)?.phaseId ?? 'foundation'] ?? C.border;
         return (
           <line
             key={i}

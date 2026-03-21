@@ -1,8 +1,9 @@
 import { describe, it, expect } from 'vitest';
 import { renderHook } from '@testing-library/react';
 
-import { useGraphFilter } from './useGraphFilter';
 import { ALL_STEPS } from '@/constants/phases';
+
+import { useGraphFilter } from './useGraphFilter';
 
 describe('useGraphFilter', () => {
   it('"all" mode: all 50 node ids are visible', () => {
