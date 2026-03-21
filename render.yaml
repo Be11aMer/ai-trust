@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: ai-trust-learning-path
+    env: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /
+    envVars:
+      - key: NODE_ENV
+        value: production

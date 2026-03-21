@@ -1,0 +1,95 @@
+/* ── DESIGN TOKENS ─────────────────────────────────────────────────────────── */
+:root {
+  /* Colors */
+  --color-bg: #060810;
+  --color-surface: #0d1117;
+  --color-surface-hi: #111820;
+  --color-border: #1a2030;
+  --color-cyan: #00e5ff;
+  --color-orange: #ff6b35;
+  --color-violet: #a78bfa;
+  --color-green: #34d399;
+  --color-pink: #f472b6;
+  --color-yellow: #fbbf24;
+  --color-lime: #86efac;
+  --color-sky: #38bdf8;
+  --color-red: #f87171;
+  --color-text: #e2e8f0;
+  --color-muted: #64748b;
+  --color-dim: #1e2a38;
+
+  /* Typography */
+  --font-mono: 'JetBrains Mono', 'IBM Plex Mono', monospace;
+  --font-serif: 'Crimson Pro', Georgia, serif;
+  --font-code: 'IBM Plex Mono', monospace;
+
+  /* Spacing */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+
+  /* Border radii */
+  --radius-sm: 3px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+
+  /* Transitions */
+  --transition-fast: 0.12s ease;
+  --transition-med: 0.2s ease;
+  --transition-slow: 0.3s ease;
+}
+
+/* ── RESET ──────────────────────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-code);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+a {
+  color: var(--color-sky);
+  text-decoration: none;
+}
+
+textarea, input {
+  font-family: var(--font-code);
+}
+
+/* ── SCROLLBAR ───────────────────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-muted);
+}

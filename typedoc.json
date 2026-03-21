@@ -1,0 +1,9 @@
+{
+  "entryPointStrategy": "expand",
+  "entryPoints": ["src"],
+  "out": "docs/api",
+  "plugin": [],
+  "skipErrorChecking": true,
+  "gitRevision": "main",
+  "readme": "README.md"
+}

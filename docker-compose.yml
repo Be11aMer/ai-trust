@@ -1,0 +1,40 @@
+services:
+  dev:
+    build:
+      context: .
+      target: deps
+    image: ai-trust-dev
+    volumes:
+      - ./src:/app/src
+      - ./public:/app/public
+      - ./index.html:/app/index.html
+      - ./vite.config.ts:/app/vite.config.ts
+    ports:
+      - '5173:5173'
+    command: npm run dev -- --host 0.0.0.0
+    environment:
+      - NODE_ENV=development
+
+  prod:
+    build:
+      context: .
+      target: production
+    image: ai-trust-prod
+    ports:
+      - '80:80'
+    environment:
+      - NODE_ENV=production
+
+  test:
+    build:
+      context: .
+      target: deps
+    image: ai-trust-test
+    volumes:
+      - ./src:/app/src
+      - ./vite.config.ts:/app/vite.config.ts
+      - ./vitest.config.ts:/app/vitest.config.ts
+      - ./tsconfig.json:/app/tsconfig.json
+    command: npm run test -- --run
+    environment:
+      - NODE_ENV=test
