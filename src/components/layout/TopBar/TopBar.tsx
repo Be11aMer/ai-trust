@@ -15,6 +15,7 @@ export interface TopBarProps {
 const VIEW_TABS: Array<[ViewMode, string]> = [
   ['path', '≡  Path'],
   ['graph', '◈  Graph'],
+  ['learn', '◳  Learn'],
 ];
 
 /**

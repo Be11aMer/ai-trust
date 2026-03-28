@@ -20,6 +20,7 @@ export interface PhaseBlockProps {
   onRemoveLink: (id: number, url: string) => void;
   onExpand: (id: number) => void;
   onGraphFocus: (id: number) => void;
+  onLearnFocus: (stepId: string) => void;
 }
 
 /**
@@ -38,6 +39,7 @@ export function PhaseBlock({
   onRemoveLink,
   onExpand,
   onGraphFocus,
+  onLearnFocus,
 }: PhaseBlockProps): React.JSX.Element {
   const done = enrichedSteps.filter((s) => progress[s.id]).length;
   return (
@@ -90,6 +92,7 @@ export function PhaseBlock({
             onRemoveLink={onRemoveLink}
             onExpand={onExpand}
             onGraphFocus={onGraphFocus}
+            onLearnFocus={onLearnFocus}
           />
         ))}
       </div>

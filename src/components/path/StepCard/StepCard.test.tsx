@@ -21,6 +21,7 @@ function renderCard(overrides: Partial<React.ComponentProps<typeof StepCard>> = 
     onRemoveLink: vi.fn(),
     onExpand: vi.fn(),
     onGraphFocus: vi.fn(),
+    onLearnFocus: vi.fn(),
     ...overrides,
   };
   return { ...render(<StepCard {...props} />), props };

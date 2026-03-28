@@ -6,6 +6,7 @@ import { TopBar } from '@/components/layout/TopBar/TopBar';
 import { PhaseLegend } from '@/components/layout/PhaseLegend/PhaseLegend';
 import { PathView } from '@/components/path/PathView/PathView';
 import { GraphView } from '@/components/graph/GraphView/GraphView';
+import { LearnView } from '@/components/learn/LearnView';
 import type { ViewMode } from '@/types/learning';
 import { C } from '@/constants/colors';
 import type { LearningStore } from '@/store/useLearningStore';
@@ -29,11 +30,17 @@ export interface AppProps {
 export function App({ store }: AppProps): React.JSX.Element {
   const [view, setView] = useState<ViewMode>('path');
   const [focusNodeId, setFocusNodeId] = useState<number | null>(null);
+  const [learnStepId, setLearnStepId] = useState<string | null>(null);
   const layoutEngineRef = useRef(new ForceLayoutEngine());
 
   const handleGraphFocus = (id: number): void => {
     setFocusNodeId(id);
     setView('graph');
+  };
+
+  const handleLearnFocus = (stepId: string): void => {
+    setLearnStepId(stepId);
+    setView('learn');
   };
 
   const handleSwitchView = (targetView: ViewMode, _phase: string, _stepId: number): void => {
@@ -89,6 +96,7 @@ export function App({ store }: AppProps): React.JSX.Element {
             onAddLink={store.addLink}
             onRemoveLink={store.removeLink}
             onGraphFocus={handleGraphFocus}
+            onLearnFocus={handleLearnFocus}
           />
         )}
 
@@ -107,7 +115,11 @@ export function App({ store }: AppProps): React.JSX.Element {
           />
         )}
 
-        <PhaseLegend progress={store.progress} />
+        {view === 'learn' && (
+          <LearnView initialStepId={learnStepId} />
+        )}
+
+        {view !== 'learn' && <PhaseLegend progress={store.progress} />}
       </div>
     </LayoutEngineContext.Provider>
   );

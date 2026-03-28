@@ -18,6 +18,7 @@ export interface PathViewProps {
   onAddLink: (id: number, url: string) => void;
   onRemoveLink: (id: number, url: string) => void;
   onGraphFocus: (id: number) => void;
+  onLearnFocus: (stepId: string) => void;
 }
 
 /**
@@ -33,6 +34,7 @@ export function PathView({
   onAddLink,
   onRemoveLink,
   onGraphFocus,
+  onLearnFocus,
 }: PathViewProps): React.JSX.Element {
   const [expandedId, setExpandedId] = useState<number | null>(null);
   const [activePhase, setActivePhase] = useState<string>('all');
@@ -74,6 +76,7 @@ export function PathView({
               onRemoveLink={onRemoveLink}
               onExpand={handleExpand}
               onGraphFocus={onGraphFocus}
+              onLearnFocus={onLearnFocus}
             />
           );
         })}

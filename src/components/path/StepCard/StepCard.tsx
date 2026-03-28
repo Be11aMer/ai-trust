@@ -21,6 +21,8 @@ export interface StepCardProps {
   onRemoveLink: (id: number, url: string) => void;
   onExpand: (id: number) => void;
   onGraphFocus: (id: number) => void;
+  /** Navigate to the Learn view for this step. */
+  onLearnFocus: (stepId: string) => void;
 }
 
 const MAX_DESC_PREVIEW = 90;
@@ -42,6 +44,7 @@ export function StepCard({
   onRemoveLink,
   onExpand,
   onGraphFocus,
+  onLearnFocus,
 }: StepCardProps): React.JSX.Element {
   const col = step.phaseColor;
   const isTrust = step.tag?.includes('★');
@@ -178,7 +181,7 @@ export function StepCard({
           )}
         </div>
 
-        {/* Graph focus + expand chevron */}
+        {/* Graph focus + Learn study + expand chevron */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '6px', flexShrink: 0 }}>
           <button
             id={`graph-focus-btn-${step.id}`}
@@ -199,6 +202,26 @@ export function StepCard({
             }}
           >
             ◈
+          </button>
+          <button
+            id={`learn-focus-btn-${step.id}`}
+            onClick={(e) => {
+              e.stopPropagation();
+              onLearnFocus(String(step.id).padStart(2, '0'));
+            }}
+            title="Open study guide for this step"
+            style={{
+              background: 'transparent',
+              border: `1px solid ${C.border}`,
+              color: C.muted,
+              cursor: 'pointer',
+              borderRadius: '3px',
+              padding: '2px 6px',
+              fontSize: '9px',
+              fontFamily: "'JetBrains Mono',monospace",
+            }}
+          >
+            ◳
           </button>
           <span
             style={{
