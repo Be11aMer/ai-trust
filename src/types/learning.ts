@@ -24,8 +24,9 @@ export type FilterMode = 'all' | 'trust' | 'todo' | 'done';
  * Active view in the top-level router.
  * - `path`  — the structured list view
  * - `graph` — the force-directed knowledge graph
+ * - `learn` — the structured study guide (per-phase content)
  */
-export type ViewMode = 'path' | 'graph';
+export type ViewMode = 'path' | 'graph' | 'learn';
 
 /**
  * Filter modes for the graph view.
